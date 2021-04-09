@@ -1,0 +1,21 @@
+[{
+        "title": "Reporte via mail",
+        "description": "Efectuar un reporte vía mail",
+        "imgUrl": "/assets/correo.jpg",
+        "urlRedirect": "/report-mail",
+        "state": "true"
+    },
+    {
+        "title": "Reportes Pendientes",
+        "description": "Acceso a lista de reportes pendientes",
+        "imgUrl": "/assets/tareas.jpg",
+        "urlRedirect": "/report-pending",
+        "state": "false"
+    }, {
+        "title": "Xls",
+        "description": "Planificación Xls",
+        "imgUrl": "/assets/excel.jpg",
+        "urlRedirect": "/planification-xls",
+        "state": "false"
+    }
+]
