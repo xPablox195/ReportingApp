@@ -3,7 +3,7 @@ import { PhotoService } from '../../services/photo.service';
 import { ChecksBoxs } from '../../interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 
-
+const formData = new FormData();
 
 @Component({
   selector: 'app-report-mail',
@@ -11,80 +11,99 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./report-mail.page.scss'],
 })
 export class ReportMailPage implements OnInit {
-
-  constructor(public photoService: PhotoService, public http: HttpClient) { }
+  constructor(public photoService: PhotoService, public http: HttpClient) {}
 
   datosReporteApiGmail = {
-    pack: '',
-    order: '',
-    program: '',
-    date: '',
-    description: '',
-    operation: '',
-    user: '',
-    images: [],
-    labels: []
+    pak: 'ABA',
+    order: 22,
+    program: 'ababdda',
+    date: new Date(),
+    description: 'No funciona la pantalla',
+    operation: 'Abastecimientos prim',
+    user: 'pluparia',
+    labels: ['Error'],
   };
 
-  Checks: ChecksBoxs[] = [{
-    name: 'Rendimiento',
-    selected: false,
-    color: 'primary'
-  },
-  {
-    name: 'Campo',
-    selected: false,
-    color: 'secondary'
-  },
-  {
-    name: 'Visual',
-    selected: false,
-    color: 'tertiary'
-  },
-  {
-    name: 'Fatal',
-    selected: false,
-    color: 'success'
-  },
-  {
-    name: 'Performance',
-    selected: false,
-    color: 'warning'
-  },
-];
+  imagesReporteApiGmail = {
+    images: [],
+  };
 
+  Checks: ChecksBoxs[] = [
+    {
+      name: 'Performance',
+      selected: false,
+      color: 'primary',
+    },
+    {
+      name: 'Campo',
+      selected: false,
+      color: 'secondary',
+    },
+    {
+      name: 'Visual',
+      selected: false,
+      color: 'tertiary',
+    },
+    {
+      name: 'Fatal',
+      selected: false,
+      color: 'success',
+    },
+    {
+      name: 'Performance',
+      selected: false,
+      color: 'warning',
+    },
+  ];
+  blob: Blob;
 
-  ngOnInit() {
-  }
+  async ngOnInit() {}
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
 
-  OnSubmit(){
+  OnSubmit() {
     this.rellenarArrayChecks();
     this.rellenarArrayPhotos();
-    this.sendDataApiGmail();
+    this.datosReporteApiGmail.order = Number(this.datosReporteApiGmail.order);
     console.log(this.datosReporteApiGmail);
+    this.sendDataApiGmail();
   }
 
-  rellenarArrayChecks(){
-    for (const check of this.Checks){
-      if (check.selected === true){
+  rellenarArrayChecks() {
+    for (const check of this.Checks) {
+      if (check.selected === true) {
         this.datosReporteApiGmail.labels.push(check.name);
       }
     }
   }
 
-  rellenarArrayPhotos(){
-    this.datosReporteApiGmail.images.push(this.photoService.photos);
+  rellenarArrayPhotos() {
+    this.photoService.loadSaved();
+    this.imagesReporteApiGmail.images = this.photoService.photos;
   }
 
-  sendDataApiGmail(){
-    return this.http.post('http://aluparia:3000/reports', this.datosReporteApiGmail).subscribe(data => {
-      console.log(data['_body']);
-     }, error => {
-      console.log(error);
+  async sendDataApiGmail() {
+    formData.append('report', JSON.stringify(this.datosReporteApiGmail));
+
+    let attached = [];
+
+    for (let image of this.imagesReporteApiGmail.images) {
+      let response = await fetch(image.webviewPath);
+      attached.push(response.blob());
+    }
+    let results = await Promise.all(attached);
+    console.log(results);
+
+    results.forEach((attachment, index) => {
+      formData.append('images', attachment, `pantalla${index}.jpg`);
     });
-}
+
+    this.http
+      .post('http://localhost:3000/reports', formData)
+      .toPromise()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
 }

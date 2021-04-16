@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request de pruebas</title>
+</head>
+
+<body>
+    <script>
+        let formdata = new FormData();
+        const body = {
+            "pak": "COM",
+            "order": 123,
+            "program": "anlpro",
+            "date": "Mon Mar 22 2021 09:37:33 GMT-0300 (GMT-03:00)",
+            "description": "Los atajos funcionan bien, a veces con una demora de un segundo, lo que repercute en la experiencia del usuario porque parece como hubiera un error cuando en realidad solo hay una demora consistente en los movimientos.",
+            "operation": "Abastecimiento/Devolucion de Conforme de Servicio",
+            "user": "aluparia",
+            "images": ["img1", "img2", "img3"],
+            "labels": ["Error", "Fatal", "Visual", "Performance"]
+        }
+
+        formdata.append(
+            'report',
+            JSON.stringify(body)
+        );
+        let requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow',
+        };
+
+        fetch('http://localhost:3000/reports', requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    </script>
+</body>
+
+</html>

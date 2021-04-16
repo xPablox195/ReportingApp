@@ -3,18 +3,16 @@
 <ion-content>
     <div class="container">
         <form #formulario="ngForm" (submit)="OnSubmit()">
-
             <ion-list-header>
                 <ion-label>Formulario válido: {{ formulario.valid }}</ion-label>
 
                 <ion-button (click)="addPhotoToGallery()" shape="round" size="large">
                     <ion-icon name="camera"></ion-icon>
                 </ion-button>
-
             </ion-list-header>
             <ion-item>
-                <ion-label>Pack:</ion-label>
-                <ion-input type="text" placeholder="Pack" name="pack" [(ngModel)]="datosReporteApiGmail.pack" pattern="[A-z]{3,4}" required></ion-input>
+                <ion-label>Pak:</ion-label>
+                <ion-input type="text" placeholder="Pak" name="pak" [(ngModel)]="datosReporteApiGmail.pak" pattern="[A-z-0-9]{3,4}" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Nro:</ion-label>
@@ -54,27 +52,17 @@
                 <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." name="notes" [(ngModel)]="datosReporteApiGmail.description" required></ion-textarea>
             </ion-item>
 
-
-
-
-
-
-
             <ion-grid>
                 <ion-row>
-                    <ion-col size="6" *ngFor="let photo of photoService.photos; index as position"></ion-col>
-                    <ion-col size="6" *ngFor="let photo of photoService.photos; index as position"></ion-col>
                     <ion-col size="6" *ngFor="let photo of photoService.photos; index as position">
                         <ion-img [src]="photo.webviewPath"></ion-img>
                     </ion-col>
                 </ion-row>
             </ion-grid>
 
-
             <ion-button [disabled]="formulario.invalid" type="submit" expand="block">
                 Enviar
             </ion-button>
-
         </form>
     </div>
 </ion-content>
