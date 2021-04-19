@@ -8,22 +8,14 @@
     <ion-grid>
         <ion-row>
             <ion-col size="12" size-lg="3" size-md="4" size-sm="6" *ngFor="let item of menuItem | async">
-
                 <ion-card class="imgMenuItem" [routerLink]="item.urlRedirect">
                     <ion-card-header>
                         <ion-card-title>{{item.title}}</ion-card-title>
-                        <ion-img src={{item.imgUrl}}></ion-img>
+                        <ion-img src="{{item.imgUrl}}"></ion-img>
                     </ion-card-header>
-                    <ion-card-content>
-                        {{item.description}}
-                    </ion-card-content>
+                    <ion-card-content> {{item.description}} </ion-card-content>
                 </ion-card>
-
-
             </ion-col>
-
         </ion-row>
     </ion-grid>
-
-
 </ion-content>

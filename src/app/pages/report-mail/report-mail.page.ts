@@ -2,25 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../../services/photo.service';
 import { ChecksBoxs } from '../../interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 const formData = new FormData();
+
+
 
 @Component({
   selector: 'app-report-mail',
   templateUrl: './report-mail.page.html',
   styleUrls: ['./report-mail.page.scss'],
 })
+
+
 export class ReportMailPage implements OnInit {
-  constructor(public photoService: PhotoService, public http: HttpClient) {}
+  constructor(
+    public photoService: PhotoService,
+    public http: HttpClient,
+    private router: Router,
+    private navCtrl: NavController
+  ) {}
 
   datosReporteApiGmail = {
-    pak: 'ABA',
-    order: 22,
-    program: 'ababdda',
+    pak: '',
+    order: 0,
+    program: '',
     date: new Date(),
-    description: 'No funciona la pantalla',
-    operation: 'Abastecimientos prim',
-    user: 'pluparia',
+    description: '',
+    operation: '',
+    user: '',
     labels: ['Error'],
   };
 
@@ -30,34 +41,41 @@ export class ReportMailPage implements OnInit {
 
   Checks: ChecksBoxs[] = [
     {
-      name: 'Performance',
-      selected: false,
-      color: 'primary',
-    },
-    {
       name: 'Campo',
       selected: false,
       color: 'secondary',
+      description: 'falta contulta',
     },
     {
       name: 'Visual',
       selected: false,
       color: 'tertiary',
+      description: 'no visualiza bien un campo, solapamiento',
     },
     {
       name: 'Fatal',
       selected: false,
       color: 'success',
+      description: 'se cuelga el navegador, debo reiniciar la app',
     },
     {
       name: 'Performance',
       selected: false,
       color: 'warning',
+      description: 'consulta en vuelo o reporte demoran en responder',
+    },
+    {
+      name: 'Funcionalidad',
+      selected: false,
+      color: 'primary',
+      description: 'no se imprimen mensajes, pop ups',
     },
   ];
   blob: Blob;
 
-  async ngOnInit() {}
+  async ngOnInit() {
+
+  }
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
@@ -68,8 +86,14 @@ export class ReportMailPage implements OnInit {
     this.rellenarArrayPhotos();
     this.datosReporteApiGmail.order = Number(this.datosReporteApiGmail.order);
     console.log(this.datosReporteApiGmail);
-    this.sendDataApiGmail();
+    this.sendDataApiGmail().then(() => {
+      this.eliminarPhotos();
+      location.reload ();
+      // this.navCtrl.navigateRoot('/menu', { animated: true, animationDirection: 'forward' });
+    });
   }
+
+
 
   rellenarArrayChecks() {
     for (const check of this.Checks) {
@@ -87,23 +111,29 @@ export class ReportMailPage implements OnInit {
   async sendDataApiGmail() {
     formData.append('report', JSON.stringify(this.datosReporteApiGmail));
 
-    let attached = [];
+    const attached = [];
 
-    for (let image of this.imagesReporteApiGmail.images) {
-      let response = await fetch(image.webviewPath);
+    for (const image of this.imagesReporteApiGmail.images) {
+      const response = await fetch(image.webviewPath);
       attached.push(response.blob());
     }
-    let results = await Promise.all(attached);
+    const results = await Promise.all(attached);
     console.log(results);
 
     results.forEach((attachment, index) => {
       formData.append('images', attachment, `pantalla${index}.jpg`);
     });
 
-    this.http
+    return this.http
       .post('http://localhost:3000/reports', formData)
-      .toPromise()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .toPromise();
+  }
+
+  async eliminarPhotos(){
+    for (const [index, photo] of this.photoService.photos.entries()) {
+        console.log(index);
+        console.log(photo);
+        this.photoService.deletePicture(photo, index);
+    }
   }
 }

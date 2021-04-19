@@ -12,7 +12,7 @@
             </ion-list-header>
             <ion-item>
                 <ion-label>Pak:</ion-label>
-                <ion-input type="text" placeholder="Pak" name="pak" [(ngModel)]="datosReporteApiGmail.pak" pattern="[A-z-0-9]{3,4}" required></ion-input>
+                <ion-input type="text" placeholder="Pak" name="pak" [(ngModel)]="datosReporteApiGmail.pak" pattern="[A-z-0-9]{3,6}" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Nro:</ion-label>
@@ -31,7 +31,7 @@
 
             <ion-item>
                 <ion-label>Fecha:</ion-label>
-                <ion-input type="text" placeholder="Fecha" name="fecha" [(ngModel)]="datosReporteApiGmail.date" required></ion-input>
+                <ion-datetime type="date" name="fecha" display-format="DD.MM.YYYY HH:mm" [value]="datosReporteApiGmail.date.toISOString()" required></ion-datetime>
             </ion-item>
 
             <ion-item>
