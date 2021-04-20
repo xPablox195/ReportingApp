@@ -125,7 +125,7 @@ export class ReportMailPage implements OnInit {
     });
 
     return this.http
-      .post('http://localhost:3000/reports', formData)
+      .post('http://aya-alfa:3000/reports', formData)
       .toPromise();
   }
 
