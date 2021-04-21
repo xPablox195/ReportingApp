@@ -73,6 +73,8 @@ export class ReportMailPage implements OnInit {
   ];
   blob: Blob;
 
+  verProgressbarSubmit = false;
+
   async ngOnInit() {
 
   }
@@ -82,6 +84,7 @@ export class ReportMailPage implements OnInit {
   }
 
   OnSubmit() {
+    this.verProgressbarSubmit = !this.verProgressbarSubmit;
     this.rellenarArrayChecks();
     this.rellenarArrayPhotos();
     this.datosReporteApiGmail.order = Number(this.datosReporteApiGmail.order);
