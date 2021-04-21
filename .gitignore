@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+#WWW
+www/
+
+#idea
+.idea/
+
+#Android
+android/
