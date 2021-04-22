@@ -88,11 +88,18 @@ export class ReportMailPage implements OnInit {
     this.rellenarArrayChecks();
     this.rellenarArrayPhotos();
     this.datosReporteApiGmail.order = Number(this.datosReporteApiGmail.order);
+    console.log('UNO');
     console.log(this.datosReporteApiGmail);
-    this.sendDataApiGmail().then(() => {
+    this.sendDataApiGmail().then((res) => {
+      console.log('DOS');
       this.eliminarPhotos();
+      console.log('TRES');
       location.reload ();
       // this.navCtrl.navigateRoot('/menu', { animated: true, animationDirection: 'forward' });
+    })
+    .catch((err) => {
+      console.log('CUATRO');
+      console.log(err);
     });
   }
 
@@ -128,7 +135,7 @@ export class ReportMailPage implements OnInit {
     });
 
     return this.http
-      .post('http://aya-alfa:3000/reports', formData)
+      .post('http://172.172.0.39:3000/reports', formData)
       .toPromise();
   }
 
