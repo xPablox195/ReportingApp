@@ -146,4 +146,8 @@ export class ReportMailPage implements OnInit {
         this.photoService.deletePicture(photo, index);
     }
   }
+
+  onClickPhoto(photo: any, index: number){
+    this.photoService.deletePicture(photo, index);
+  }
 }
