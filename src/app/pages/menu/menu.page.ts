@@ -4,6 +4,7 @@ import { MenuComponents } from '../../interfaces/interfaces';
 import { Observable } from 'rxjs';
 
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
