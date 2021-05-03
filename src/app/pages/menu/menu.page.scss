@@ -1,26 +1,34 @@
+.header-toolbar {
+    color: light;
+}
+
+.title-toolbar {
+    font-weight: bold;
+}
+
 .contenido {
     background: #dcddde;
 }
 
 .card-obj {
-    height: 300px;
+    height: auto;
     border-radius: 7px;
-    width: 15rem;
+    width: auto;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-header {
-    position: relative;
+    height: 50px;
 }
 
 .card-img {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
-    max-width: 100%;
-    height: 150px;
     display: block;
+    height: max-content;
+    width: auto;
 }
 
 .card-title {
@@ -28,7 +36,8 @@
     font-family: "Times New Roman";
     font-weight: bold;
     font-size: 20px;
-    padding: 1px 5px;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .card-description {

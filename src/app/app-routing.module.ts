@@ -14,7 +14,15 @@ const routes: Routes = [
   {
     path: 'report-mail',
     loadChildren: () => import('./pages/report-mail/report-mail.module').then( m => m.ReportMailPageModule)
+  },  {
+    path: 'data-base',
+    loadChildren: () => import('./pages/data-base/data-base.module').then( m => m.DataBasePageModule)
   },
+  {
+    path: 'report-pending',
+    loadChildren: () => import('./pages/report-pending/report-pending.module').then( m => m.ReportPendingPageModule)
+  },
+
 ];
 
 @NgModule({

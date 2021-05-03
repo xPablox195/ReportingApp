@@ -1,6 +1,7 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>Menu Principal</ion-title>
+    <ion-toolbar color="medium">
+        <ion-title class="title-toolbar">MENU PRINCIPAL
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -9,12 +10,13 @@
         <ion-row>
             <ion-col size="12" size-lg="3" size-md="4" size-sm="6" *ngFor="let item of menuItem | async">
                 <ion-card class="card-obj" [routerLink]="item.urlRedirect">
+                    <ion-img class="card-img" src="{{item.imgUrl}}" alt="Avatar"></ion-img>
                     <ion-card-header class="card-header">
-                        <ion-img class="card-img" src="{{item.imgUrl}}" alt="Avatar"></ion-img>
+
                         <ion-card-title class="card-title">{{item.title}}</ion-card-title>
+                        <!--<ion-card-subtitle class="card-description"> {{item.description}}</ion-card-subtitle> -->
                     </ion-card-header>
 
-                    <ion-card-content class="card-description"> {{item.description}} </ion-card-content>
                 </ion-card>
             </ion-col>
         </ion-row>

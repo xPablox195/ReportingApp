@@ -17,5 +17,11 @@
         "imgUrl": "/assets/excel.jpg",
         "urlRedirect": "/planification-xls",
         "state": "false"
+    }, {
+        "title": "Database queries",
+        "description": "Consultas a Base de datos + pruebas",
+        "imgUrl": "/assets/basededatos.jpg",
+        "urlRedirect": "/data-base",
+        "state": "true"
     }
 ]

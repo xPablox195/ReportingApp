@@ -23,3 +23,39 @@ export interface ChecksBoxs {
   color: string;
   description?: string;
 }
+
+
+// Pending Reports
+export interface Mail {
+  id: string;
+  threadId: string;
+  labelIds: [
+    string
+  ];
+  snippet: string;
+  historyId: string;
+  internalDate: string;
+  payload: MessagePart;
+  sizeEstimate: number;
+  raw: string;
+}
+
+export interface MessagePart{
+  partId: string;
+  mimeType: string;
+  filename: string;
+  headers: Header[];
+  body: MessagePartBody;
+  parts: MessagePart[];
+}
+
+export interface Header{
+  name: string;
+  value: string;
+}
+
+export interface MessagePartBody{
+  attachmentId: string;
+  size: number;
+  data: string;
+}
