@@ -1,0 +1,37 @@
+<ion-content>
+
+    <ion-toolbar>
+        <!-- Searchbar with a placeholder -->
+        <ion-searchbar placeholder="name report"></ion-searchbar>
+        <ion-searchbar placeholder="usser"></ion-searchbar>
+    </ion-toolbar>
+    <ion-list>
+        <ion-item>
+            <ion-label>Campo</ion-label>
+            <ion-toggle></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Visual</ion-label>
+            <ion-toggle></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Fatal</ion-label>
+            <ion-toggle></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Performance</ion-label>
+            <ion-toggle></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Funcionalidad</ion-label>
+            <ion-toggle></ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-button (click)="onClickAPlicarFiltro()" expand="block">
+            Aplicar Flitro
+        </ion-button>
+    </ion-list>
+</ion-content>

@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { HeaderComponent } from '../header/header.component';
+import { PopoverFiltroComponent } from '../popover-filtro/popover-filtro.component';
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    PopoverFiltroComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    PopoverFiltroComponent
   ],
   imports: [
     CommonModule,

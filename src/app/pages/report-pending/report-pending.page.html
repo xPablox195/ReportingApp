@@ -1,5 +1,14 @@
-<app-header titulo="Reportes Pendientes"></app-header>
+<ion-toolbar color="medium">
+    <ion-back-button defaultHref="/" slot="start"></ion-back-button>
+    <ion-title class="title-toolbar">Reportes Pendientes</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click)="presentPopover($event)">
+            <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>
 
 <ion-content>
+
 
 </ion-content>
