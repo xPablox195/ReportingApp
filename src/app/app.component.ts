@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {registerWebPlugin} from '@capacitor/core';
+import {FileSharer} from '@byteowls/capacitor-filesharer';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    this.initializeApp();
+  }
+
+  initializeApp(){
+   registerWebPlugin(FileSharer);
+  }
 }

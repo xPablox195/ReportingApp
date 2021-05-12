@@ -4,6 +4,7 @@ import { ChecksBoxs } from '../../interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Share } from '@capacitor/core';
 
 const formData = new FormData();
 
@@ -149,5 +150,12 @@ export class ReportMailPage implements OnInit {
 
   onClickPhoto(photo: any, index: number){
     this.photoService.deletePicture(photo, index);
+  }
+
+  async compartir(){
+    await Share.share({
+      title: 'lo consegui',
+      url: 'https://www.google.com.ar/'
+    });
   }
 }
