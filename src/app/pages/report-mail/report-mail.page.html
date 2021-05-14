@@ -73,7 +73,7 @@
                 <ion-icon name="camera"></ion-icon>
             </ion-button>
 
-            <ion-button (click)="compartir()" expand="block">
+            <ion-button [disabled]="formulario.invalid" (click)="compartir()" expand="block">
                 Compartir
             </ion-button>
             <ion-button [disabled]="formulario.invalid" type="submit" expand="block">

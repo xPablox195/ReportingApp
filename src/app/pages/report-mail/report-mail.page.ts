@@ -4,7 +4,7 @@ import { ChecksBoxs } from '../../interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Share } from '@capacitor/core';
+import { Plugins, Share } from '@capacitor/core';
 
 const formData = new FormData();
 
@@ -154,8 +154,15 @@ export class ReportMailPage implements OnInit {
 
   async compartir(){
     await Share.share({
-      title: 'lo consegui',
-      url: 'https://www.google.com.ar/'
+      title: 'Reporte de Incidencias',
+      text: 'USUARIO: ' + this.datosReporteApiGmail.user + '\n\n'
+      + 'OPERACIÓN: ' + this.datosReporteApiGmail.operation + '\n'
+      + 'PROGRAMA: ' + this.datosReporteApiGmail.program + '\n'
+      + 'PACK: ' + this.datosReporteApiGmail.pak + '\n'
+      + 'NRO: ' + this.datosReporteApiGmail.order + '\n\n'
+      + 'TAGS: ' + this.datosReporteApiGmail.labels + '\n\n'
+      + 'OBSERVACIONES: ' +  this.datosReporteApiGmail.description + '\n\n'
+      + 'FECHA: ' + this.datosReporteApiGmail.date + '\n\n',
     });
   }
 }
