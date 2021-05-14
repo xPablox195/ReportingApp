@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'report-pending',
     loadChildren: () => import('./pages/report-pending/report-pending.module').then( m => m.ReportPendingPageModule)
   },
+  {
+    path: 'xls',
+    loadChildren: () => import('./pages/xls/xls.module').then( m => m.XlsPageModule)
+  },
 
 ];
 

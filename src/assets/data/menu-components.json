@@ -15,7 +15,7 @@
         "title": "Xls",
         "description": "Planificación Xls",
         "imgUrl": "/assets/excel.jpg",
-        "urlRedirect": "/planification-xls",
+        "urlRedirect": "/xls",
         "state": "false"
     }, {
         "title": "Database queries",
