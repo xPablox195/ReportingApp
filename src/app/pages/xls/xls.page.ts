@@ -16,7 +16,7 @@ export class XlsPage implements OnInit {
   headerRow: any[] = [];
 
   constructor(private http: HttpClient, private papa: Papa, private plt: Platform, private socialSharing: SocialSharing,
-    private file: File) {
+              private file: File) {
     this.loadCSV();
    }
 
@@ -32,7 +32,7 @@ export class XlsPage implements OnInit {
   }
 
   private extractData(res) {
-    let csvData = res || '';
+    const csvData = res || '';
 
     this.papa.parse(csvData, {
       complete: parsedData => {
@@ -46,13 +46,13 @@ export class XlsPage implements OnInit {
   }
 
   exportCSV(){
-    let csv = this.papa.unparse({
+    const csv = this.papa.unparse({
       fields: this.headerRow,
       data: this.csvData
     });
     if (this.plt.is('cordova')) {
       this.file.writeFile(this.file.dataDirectory, 'data.csv', csv, {replace: true}).then( res => {
-        this.socialSharing.share(null, null, res.nativeURL, null).then(e =>{
+        this.socialSharing.share(null, null, res.nativeURL, null).then(e => {
           // Success
         }).catch(e => {
           console.log('Share failed:', e);
@@ -60,11 +60,11 @@ export class XlsPage implements OnInit {
       }, err => {
         console.log('Error: ', err);
       });
- 
+
     } else {
       // Dummy implementation for Desktop download purpose
-      var blob = new Blob([csv]);
-      var a = window.document.createElement('a');
+      const blob = new Blob([csv]);
+      const a = window.document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
       a.download = 'newdata.csv';
       document.body.appendChild(a);
@@ -72,7 +72,7 @@ export class XlsPage implements OnInit {
       document.body.removeChild(a);
     }
   }
- 
+
   trackByFn(index: any, item: any) {
     return index;
   }
