@@ -1,0 +1,18 @@
+<ion-button slot="end" (click)=" exportCSV()" expand="block" fill="clear">
+  EXPORT
+</ion-button>
+
+<ion-content scrollX="true">
+
+  <table border="1" class="data-table">
+      <tr>
+          <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b></td>
+      </tr>
+      <tr *ngFor="let row of csvData; let i = index">
+          <td *ngFor="let data of row; let j = index; trackBy: trackByFn" class="data-col">
+              <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
+          </td>
+      </tr>
+  </table>
+
+</ion-content>

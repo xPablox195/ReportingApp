@@ -4,21 +4,26 @@ import { IonicModule } from '@ionic/angular';
 
 import { HeaderComponent } from '../header/header.component';
 import { PopoverFiltroComponent } from '../popover-filtro/popover-filtro.component';
+import { FormsModule } from '@angular/forms';
+import { DatatableComponent } from '../datatable/datatable.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    PopoverFiltroComponent
+    PopoverFiltroComponent,
+    DatatableComponent
   ],
   exports: [
     HeaderComponent,
-    PopoverFiltroComponent
+    PopoverFiltroComponent,
+    DatatableComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ]
 })
 export class ComponentsModule { }
