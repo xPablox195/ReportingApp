@@ -24,6 +24,11 @@ export interface ChecksBoxs {
   description?: string;
 }
 
+export interface RowListOptions {
+  id: number;
+  message: number;
+}
+
 
 // Pending Reports
 export interface Mail {

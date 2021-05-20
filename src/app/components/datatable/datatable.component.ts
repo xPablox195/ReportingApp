@@ -4,22 +4,55 @@ import { Papa } from 'ngx-papaparse';
 import { Platform } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { RowListOptions } from '../../interfaces/interfaces';
+
+
+
 
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
   styleUrls: ['./datatable.component.scss'],
 })
+
+
 export class DatatableComponent implements OnInit {
 
   csvData: any[] = [];
   headerRow: any[] = [];
+  lengthHeader: number;
+  lengthData: number;
+  arrayEmpty: any[] = [];
+
+  customPopoverOptions: any = {
+    header: 'Items per page',
+    message: 'Selecciona la cantidad de registros por pagina'
+  };
 
   constructor(private http: HttpClient, private papa: Papa, private plt: Platform, private socialSharing: SocialSharing,
               private file: File)
               {
                 this.loadCSV();
               }
+
+  rowListOptions: RowListOptions[] = [
+    {
+      id: 5,
+      message: 5,
+    },
+    {
+      id: 10,
+      message: 10,
+    },
+    {
+      id: 15,
+      message: 15,
+    },
+    {
+      id: 20,
+      message: 20,
+    },
+  ];
 
   ngOnInit() {}
 
@@ -40,7 +73,12 @@ export class DatatableComponent implements OnInit {
     this.papa.parse(csvData, {
       complete: parsedData => {
         this.headerRow = parsedData.data.splice(0, 1)[0];
+        this.lengthHeader = this.headerRow.length;
+        console.log(this.csvData.length); // tamaño de los datos
+        console.log(this.headerRow.length); // tamaño del header
         this.csvData = parsedData.data;
+        this.lengthData = this.csvData.length;
+        // console.log(csvData);
       }
     });
   }
@@ -77,4 +115,30 @@ export class DatatableComponent implements OnInit {
     return index;
   }
 
+  onDeleteRow(i: number){
+    this.csvData.splice(i, 1);
+  }
+
+  addRowEmpty(i: number){
+    // console.log(this.csvData[i]);
+    this.lengthData++;
+    for ( let k = 0 ; k < this.lengthHeader ; k++)
+    {
+      this.arrayEmpty.push('');
+    }
+    console.log(this.arrayEmpty);
+    this.csvData.splice(i + 1, 0 ,  this.arrayEmpty);
+    this.arrayEmpty = [];
+    console.log(this.csvData);
+  }
+
+  selectCountRow(id: number){
+
+  }
+
+  onClick(){
+
+  }
+
 }
+
