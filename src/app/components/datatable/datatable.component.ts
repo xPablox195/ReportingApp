@@ -24,6 +24,11 @@ export class DatatableComponent implements OnInit {
   lengthData: number;
   arrayEmpty: any[] = [];
 
+  arrayPaginado: any[] = [];
+  selectBoxCountRow: number;
+  csvDataBackup: any[] = [];
+
+
   customPopoverOptions: any = {
     header: 'Items per page',
     message: 'Selecciona la cantidad de registros por pagina'
@@ -77,6 +82,7 @@ export class DatatableComponent implements OnInit {
         console.log(this.csvData.length); // tamaño de los datos
         console.log(this.headerRow.length); // tamaño del header
         this.csvData = parsedData.data;
+        this.csvDataBackup = this.csvData; // para paginado
         this.lengthData = this.csvData.length;
         // console.log(csvData);
       }
@@ -132,8 +138,19 @@ export class DatatableComponent implements OnInit {
     console.log(this.csvData);
   }
 
-  selectCountRow(id: number){
+  selectCountRow(evento: any){
+    this.arrayPaginado = this.csvDataBackup;
+    this.csvData = [];
 
+    this.arrayPaginado.forEach((element, index) => {
+      // console.log(index , 'IndexPagin');
+      // console.log(this.selectBoxCountRow , 'popoverseleccionado');
+      if (  index < this.selectBoxCountRow){
+        this.csvData.splice(this.selectBoxCountRow, 0 , this.arrayPaginado[index]);
+       //  console.log(this.csvData);
+        // console.log('si');
+      }
+    });
   }
 
   onClick(){

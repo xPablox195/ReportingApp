@@ -11,20 +11,6 @@
   <ion-toolbar>
 
     <ion-buttons slot="start">
-      <ion-list>
-        <ion-item>
-         
-          <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" >
-            <ion-list *ngFor="let item of rowListOptions">
-            <ion-item>
-              <ion-select-option (clic)="selectCountRow(item.id)" value={{item.id}}>{{item.message}}</ion-select-option>
-            </ion-item>
-          </ion-list>
-          </ion-select>
-          <ion-label>Registros</ion-label>
-        </ion-item>
-      </ion-list>
-
       <ion-button (click)="onClick()">
         <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
       </ion-button>
@@ -33,7 +19,15 @@
         <ion-icon slot="icon-only" name="play-back"></ion-icon>
       </ion-button>
 
-  
+      <ion-list>
+        <ion-item>
+          <ion-label>Registros</ion-label>
+            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" [(ngModel)]='selectBoxCountRow' (ionChange)="selectCountRow($event)"  >
+              <ion-select-option *ngFor="let item of rowListOptions" value={{item.id}}>{{item.message}}</ion-select-option>
+            </ion-select>
+          
+        </ion-item>
+      </ion-list>
 
       <ion-button (click)="onClick()">
         <ion-icon slot="icon-only" name="play-forward"></ion-icon>
@@ -58,7 +52,7 @@
   <ion-content scrollX="true" scrollY="true">
   
 
-  <table border="1" class="data-table"  scrollX="true" scrollY="true">
+  <table border="1" class="data-table">
       <tr>
           <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b>
           
