@@ -13,14 +13,15 @@
     <ion-buttons slot="start">
       <ion-list>
         <ion-item>
-          <ion-label>Registros</ion-label>
-          <ion-select [interfaceOptions]="customPopoverOptions" interface="popoverRows" >
+         
+          <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" >
             <ion-list *ngFor="let item of rowListOptions">
             <ion-item>
               <ion-select-option (clic)="selectCountRow(item.id)" value={{item.id}}>{{item.message}}</ion-select-option>
             </ion-item>
           </ion-list>
           </ion-select>
+          <ion-label>Registros</ion-label>
         </ion-item>
       </ion-list>
 
