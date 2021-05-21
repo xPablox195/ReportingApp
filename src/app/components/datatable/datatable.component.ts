@@ -154,10 +154,16 @@ export class DatatableComponent implements OnInit {
     {
       this.arrayEmpty.push('');
     }
-    console.log(this.arrayEmpty);
-    this.csvData.splice(i + 1, 0 ,  this.arrayEmpty);
+    // console.log(this.arrayEmpty);
+    // console.log(this.csvData);
+    this.csvDataBackup.forEach((item, index) => {
+        if (item === this.csvData[i])
+        {
+            this.csvDataBackup.splice(index + 1, 0 ,  this.arrayEmpty);
+          }
+    });
     this.arrayEmpty = [];
-    console.log(this.csvData);
+    this.actualizarcsvBackup();
   }
 
   selectCountRow(evento: any){
