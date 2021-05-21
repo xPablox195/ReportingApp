@@ -29,8 +29,8 @@ export class DatatableComponent implements OnInit {
   selectBoxCountRow: number;
   csvDataBackup: any[] = [];
 
-  numeroPaginas: number;
-  contadorPagActal: number;
+  numeroPaginas: number; // numero de paginas de la tablas, si esta establecida la cantidad de registros.
+  contadorPagActal: number; // establece la pàgina que se està presentando.
   irPagina: number;
 
 
@@ -131,19 +131,11 @@ export class DatatableComponent implements OnInit {
   }
 
   onDeleteRow(i: number){
-    this.csvData.splice(i, 1);
     this.csvDataBackup.forEach((item, index) => {
-      if (index === 0 && this.csvDataBackup[0] !== this.csvData[0]){
+      if (item === this.csvData[i]){
         this.csvDataBackup.splice(index, 1);
-      }else{
-        if (item === this.csvData[index]){
-          if (this.csvDataBackup[index + 1] !== this.csvData[index + 1]){
-            this.csvDataBackup.splice(index + 1, 1);
-          }
-        }
       }
     });
-
     this.actualizarcsvBackup();
   }
 
@@ -176,7 +168,7 @@ export class DatatableComponent implements OnInit {
     }else{
       this.numeroPaginas = Math.trunc((this.csvDataBackup.length / this.selectBoxCountRow));
 
-      this.irPagina = this.contadorPagActal - 1;
+      this.irPagina = (this.contadorPagActal - 1) * 5;
 
       this.csvData = [];
 
@@ -186,6 +178,7 @@ export class DatatableComponent implements OnInit {
       }
 
     }
+    
   }
 
   calcularNumerodePaginas()
@@ -193,8 +186,34 @@ export class DatatableComponent implements OnInit {
       return(Math.trunc((this.csvDataBackup.length / this.selectBoxCountRow)));
   }
 
-  onClick(){
-    this.contadorPagActal ++;
+  rigth(){
+    if ( this.selectBoxCountRow !== 0){
+      this.contadorPagActal ++;
+      this.actualizarcsvBackup();
+    }
+  }
+
+  left(){
+    if ( this.selectBoxCountRow !== 0 && this.contadorPagActal !== 1){
+      this.contadorPagActal --;
+      this.actualizarcsvBackup();
+    }
+
+  }
+
+  finalLeft(){
+    if ( this.selectBoxCountRow !== 0 && this.contadorPagActal !== 1){
+      this.contadorPagActal = 1;
+      this.actualizarcsvBackup();
+    }
+  }
+
+
+  finalRigth(){
+    if ( this.selectBoxCountRow !== 0){
+      this.contadorPagActal = this.numeroPaginas;
+      this.actualizarcsvBackup();
+    }
   }
 
 }

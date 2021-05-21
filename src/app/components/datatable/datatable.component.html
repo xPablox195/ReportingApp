@@ -11,11 +11,11 @@
   <ion-label>Page number {{contadorPagActal}} of {{numeroPaginas}}</ion-label>
   <ion-toolbar>
     <ion-buttons>
-      <ion-button (click)="onClick()">
+      <ion-button (click)="finalLeft()">
         <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
       </ion-button>
 
-      <ion-button (click)="onClick()">
+      <ion-button (click)="left()">
         <ion-icon slot="icon-only" name="play-back"></ion-icon>
       </ion-button>
 
@@ -29,12 +29,12 @@
         </ion-item>
       </ion-list>
 
-      <ion-button (click)="onClick()">
+      <ion-button (click)="rigth()">
         <ion-icon slot="icon-only" name="play-forward"></ion-icon>
       </ion-button>
 
 
-      <ion-button (click)="onClick()">
+      <ion-button (click)="finalRigth()">
         <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -57,11 +57,11 @@
       </tr>
       <tr *ngFor="let row of csvData; let i = index">
           <td *ngFor="let data of row; let j = index; trackBy: trackByFn" class="data-col">
-            <div *ngIf="i <= lengthData">
+            <div *ngIf="i <= csvData.length">
               <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
             </div>
           </td>
-          <td *ngIf="i < lengthData">
+          <td *ngIf="i < csvData.length">
             <div>
               <ion-icon slot="start" name="trash-outline" (click)="onDeleteRow(i)"></ion-icon>
               <ion-icon slot="start" name="add" (click)="addRowEmpty(i)"></ion-icon>
