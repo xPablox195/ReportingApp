@@ -9,6 +9,7 @@ import { RowListOptions } from '../../interfaces/interfaces';
 
 
 
+
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
@@ -27,6 +28,10 @@ export class DatatableComponent implements OnInit {
   arrayPaginado: any[] = [];
   selectBoxCountRow: number;
   csvDataBackup: any[] = [];
+
+  numeroPaginas: number;
+  contadorPagActal: number;
+  irPagina: number;
 
 
   customPopoverOptions: any = {
@@ -59,7 +64,11 @@ export class DatatableComponent implements OnInit {
     },
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.contadorPagActal = 1;
+    this.selectBoxCountRow = 0;
+    this.numeroPaginas = 1;
+  }
 
   private loadCSV() {
     this.http
@@ -79,10 +88,10 @@ export class DatatableComponent implements OnInit {
       complete: parsedData => {
         this.headerRow = parsedData.data.splice(0, 1)[0];
         this.lengthHeader = this.headerRow.length;
-        console.log(this.csvData.length); // tamaño de los datos
-        console.log(this.headerRow.length); // tamaño del header
+        // console.log(this.csvData.length); // tamaño de los datos
+        // console.log(this.headerRow.length); // tamaño del header
         this.csvData = parsedData.data;
-        this.csvDataBackup = this.csvData; // para paginado
+        this.csvDataBackup = this.csvData; // para cantidad de registros (filtro)
         this.lengthData = this.csvData.length;
         // console.log(csvData);
       }
@@ -123,6 +132,19 @@ export class DatatableComponent implements OnInit {
 
   onDeleteRow(i: number){
     this.csvData.splice(i, 1);
+    this.csvDataBackup.forEach((item, index) => {
+      if (index === 0 && this.csvDataBackup[0] !== this.csvData[0]){
+        this.csvDataBackup.splice(index, 1);
+      }else{
+        if (item === this.csvData[index]){
+          if (this.csvDataBackup[index + 1] !== this.csvData[index + 1]){
+            this.csvDataBackup.splice(index + 1, 1);
+          }
+        }
+      }
+    });
+
+    this.actualizarcsvBackup();
   }
 
   addRowEmpty(i: number){
@@ -139,22 +161,34 @@ export class DatatableComponent implements OnInit {
   }
 
   selectCountRow(evento: any){
-    this.arrayPaginado = this.csvDataBackup;
-    this.csvData = [];
+    this.actualizarcsvBackup();
+  }
 
-    this.arrayPaginado.forEach((element, index) => {
-      // console.log(index , 'IndexPagin');
-      // console.log(this.selectBoxCountRow , 'popoverseleccionado');
-      if (  index < this.selectBoxCountRow){
-        this.csvData.splice(this.selectBoxCountRow, 0 , this.arrayPaginado[index]);
-       //  console.log(this.csvData);
-        // console.log('si');
+  actualizarcsvBackup(){
+    if (this.selectBoxCountRow === 0){
+      this.csvData = this.csvDataBackup;
+    }else{
+      this.numeroPaginas = Math.trunc((this.csvDataBackup.length / this.selectBoxCountRow));
+
+      this.irPagina = this.contadorPagActal - 1;
+
+      this.csvData = [];
+
+      for (let i = 0; i < this.selectBoxCountRow ; i ++){
+        this.csvData.splice(i, 0, this.csvDataBackup[this.irPagina]);
+        this.irPagina++;
       }
-    });
+
+    }
+  }
+
+  calcularNumerodePaginas()
+  {
+      return(Math.trunc((this.csvDataBackup.length / this.selectBoxCountRow)));
   }
 
   onClick(){
-
+    this.contadorPagActal ++;
   }
 
 }

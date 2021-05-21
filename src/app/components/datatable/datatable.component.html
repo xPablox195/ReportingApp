@@ -8,9 +8,9 @@
 </ion-toolbar>
 
 <ion-footer>
+  <ion-label>Page number {{contadorPagActal}} of {{numeroPaginas}}</ion-label>
   <ion-toolbar>
-
-    <ion-buttons slot="start">
+    <ion-buttons>
       <ion-button (click)="onClick()">
         <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
       </ion-button>
@@ -37,10 +37,7 @@
       <ion-button (click)="onClick()">
         <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
       </ion-button>
-
     </ion-buttons>
-
-
   </ion-toolbar>
 </ion-footer>
 
