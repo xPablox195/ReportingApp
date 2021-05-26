@@ -6,6 +6,9 @@ import { HeaderComponent } from '../header/header.component';
 import { PopoverFiltroComponent } from '../popover-filtro/popover-filtro.component';
 import { FormsModule } from '@angular/forms';
 import { DatatableComponent } from '../datatable/datatable.component';
+import { FormDatatableComponent } from '../form-datatable/form-datatable.component';
+
+
 
 
 
@@ -13,12 +16,12 @@ import { DatatableComponent } from '../datatable/datatable.component';
   declarations: [
     HeaderComponent,
     PopoverFiltroComponent,
-    DatatableComponent
+    DatatableComponent, FormDatatableComponent
   ],
   exports: [
     HeaderComponent,
     PopoverFiltroComponent,
-    DatatableComponent
+    DatatableComponent, FormDatatableComponent
   ],
   imports: [
     CommonModule,

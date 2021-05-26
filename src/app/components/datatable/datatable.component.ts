@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
 import { Platform } from '@ionic/angular';
@@ -25,13 +25,21 @@ export class DatatableComponent implements OnInit {
   lengthData: number;
   arrayEmpty: any[] = [];
 
+  // Registros por página
   arrayPaginado: any[] = [];
   selectBoxCountRow: number;
   csvDataBackup: any[] = [];
 
+  // Paginado (rigth - left, etc)
   numeroPaginas: number; // numero de paginas de la tablas, si esta establecida la cantidad de registros.
   contadorPagActal: number; // establece la pàgina que se està presentando.
   irPagina: number;
+
+  // Completar Formulario
+  mostrarFormulario: boolean;
+  mostrarTabla = true;
+
+
 
 
   customPopoverOptions: any = {
@@ -166,7 +174,7 @@ export class DatatableComponent implements OnInit {
     if (this.selectBoxCountRow === 0){
       this.csvData = this.csvDataBackup;
     }else{
-      this.numeroPaginas = Math.trunc((this.csvDataBackup.length / this.selectBoxCountRow));
+      this.numeroPaginas = Math.ceil((this.csvDataBackup.length / this.selectBoxCountRow));
 
       this.irPagina = (this.contadorPagActal - 1) * 5;
 
@@ -178,7 +186,7 @@ export class DatatableComponent implements OnInit {
       }
 
     }
-    
+
   }
 
   calcularNumerodePaginas()
@@ -187,7 +195,7 @@ export class DatatableComponent implements OnInit {
   }
 
   rigth(){
-    if ( this.selectBoxCountRow !== 0){
+    if ( this.selectBoxCountRow !== 0 && this.contadorPagActal < this.numeroPaginas){
       this.contadorPagActal ++;
       this.actualizarcsvBackup();
     }
@@ -210,11 +218,21 @@ export class DatatableComponent implements OnInit {
 
 
   finalRigth(){
-    if ( this.selectBoxCountRow !== 0){
+    if ( this.selectBoxCountRow !== 0 && this.contadorPagActal < this.numeroPaginas){
       this.contadorPagActal = this.numeroPaginas;
       this.actualizarcsvBackup();
     }
   }
 
+
+  completarFormulario(){
+    if ( this.mostrarFormulario === true){
+      this.mostrarFormulario = false;
+      this.mostrarTabla = true;
+    }else{
+      this.mostrarFormulario = true;
+      this.mostrarTabla = false;
+    }
+  }
 }
 

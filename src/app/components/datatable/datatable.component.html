@@ -1,78 +1,100 @@
-<ion-toolbar>
+<ion-toolbar >
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
   <ion-title>Mi Documento</ion-title>
   <ion-buttons slot="end">
+  <ion-button (click)="completarFormulario()">
+    <ion-icon slot="icon-only" name="newspaper-outline"></ion-icon>
+  </ion-button>
+  <ion-button (click)="exportCSV()">
+    <ion-icon slot="icon-only" name="cloud-upload-outline"></ion-icon>
+  </ion-button>
     <ion-button (click)="exportCSV()">
       <ion-icon slot="icon-only" name="download-outline"></ion-icon>
     </ion-button>
   </ion-buttons>
 </ion-toolbar>
 
-<ion-footer>
-  <ion-label>Page number {{contadorPagActal}} of {{numeroPaginas}}</ion-label>
-  <ion-toolbar>
-    <ion-buttons>
-      <ion-button (click)="finalLeft()">
-        <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
-      </ion-button>
+<ion-toolbar *ngIf="mostrarTabla">
+  <ion-buttons>
+    <ion-list>
+      <ion-item>
+        <ion-label>Filas</ion-label>
+          <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" [(ngModel)]='selectBoxCountRow' (ionChange)="selectCountRow($event)"  >
+            <ion-select-option *ngFor="let item of rowListOptions" value={{item.id}}>{{item.message}}</ion-select-option>
+          </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-buttons>
+<ion-buttons slot="end">
+    <ion-button (click)="exportCSV()">
+      <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="exportCSV()">
+      <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
 
-      <ion-button (click)="left()">
-        <ion-icon slot="icon-only" name="play-back"></ion-icon>
-      </ion-button>
-
-      <ion-list>
-        <ion-item>
-          <ion-label>Registros</ion-label>
-            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" [(ngModel)]='selectBoxCountRow' (ionChange)="selectCountRow($event)"  >
-              <ion-select-option *ngFor="let item of rowListOptions" value={{item.id}}>{{item.message}}</ion-select-option>
-            </ion-select>
-          
-        </ion-item>
-      </ion-list>
-
-      <ion-button (click)="rigth()">
-        <ion-icon slot="icon-only" name="play-forward"></ion-icon>
-      </ion-button>
-
-
-      <ion-button (click)="finalRigth()">
-        <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
-
-
-
-
-
-
-  <ion-content scrollX="true" scrollY="true">
+  <app-form-datatable scrollX="true" scrollY="true" [mostrarFormulario]="mostrarFormulario" [headerRow]="headerRow"></app-form-datatable>
+ 
   
 
-  <table border="1" class="data-table">
-      <tr>
-          <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b>
-          
-          </td>
-      </tr>
-      <tr *ngFor="let row of csvData; let i = index">
-          <td *ngFor="let data of row; let j = index; trackBy: trackByFn" class="data-col">
-            <div *ngIf="i <= csvData.length">
-              <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
-            </div>
-          </td>
-          <td *ngIf="i < csvData.length">
-            <div>
-              <ion-icon slot="start" name="trash-outline" (click)="onDeleteRow(i)"></ion-icon>
-              <ion-icon slot="start" name="add" (click)="addRowEmpty(i)"></ion-icon>
-            </div>
-          </td>
-      </tr>
-  </table>
+  <ion-content  scrollX="true" scrollY="true"  *ngIf="mostrarTabla" >
+    <table border="1" class="data-table">
+        <tr>
+            <td *ngFor="let header of headerRow" text-center>
+              <b>{{ header }}</b>
+            </td>
+        </tr>
+        <tr *ngFor="let row of csvData; let i = index">
+            <td *ngFor="let data of row; let j = index; trackBy: trackByFn" class="data-col">
+              <div *ngIf="i <= csvData.length">
+                <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
+              </div>
+            </td>
+            <td *ngIf="i < csvData.length">
+              <div>
+                <ion-icon slot="start" name="trash-outline" (click)="onDeleteRow(i)"></ion-icon>
+                <ion-icon slot="start" name="add" (click)="addRowEmpty(i)"></ion-icon>
+              </div>
+            </td>
+        </tr>
+    </table>
+  </ion-content>
 
-  
+  <ion-footer *ngIf="mostrarTabla">
+   
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-label>Page number {{contadorPagActal}} of {{numeroPaginas}}</ion-label>
+        <ion-button (click)="finalLeft()">
+          <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
+        </ion-button>
 
-</ion-content>
+        <ion-button (click)="left()">
+          <ion-icon slot="icon-only" name="play-back"></ion-icon>
+        </ion-button>
+        
+        
+
+        <ion-button (click)="rigth()">
+          <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+        </ion-button>
+
+
+        <ion-button (click)="finalRigth()">
+          <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
+        </ion-button>
+
+       
+        
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+
+ 
 
 
 

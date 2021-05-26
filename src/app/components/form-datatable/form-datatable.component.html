@@ -1,0 +1,30 @@
+
+
+  <ion-content  *ngIf="mostrarFormulario" >
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Formulario</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Complete los datos correspondientes por favor:
+  
+        <ion-list *ngFor="let header of headerRow">
+          <ion-item>
+            <ion-label position="stacked">{{header}}</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+        </ion-list>
+      
+        <ion-button (click)="onSubmit()" expand="block"  shape="round">
+          Ok
+        </ion-button>
+      </ion-card-content>
+  
+      
+  
+    </ion-card>
+  
+    
+  </ion-content>
+
