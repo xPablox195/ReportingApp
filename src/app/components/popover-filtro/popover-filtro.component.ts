@@ -8,7 +8,7 @@ import { PopoverController } from '@ionic/angular';
 })
 export class PopoverFiltroComponent implements OnInit {
 
-  constructor(private popoverController:PopoverController) { }
+  constructor(private popoverController: PopoverController) { }
 
   ngOnInit() {}
 

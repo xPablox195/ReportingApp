@@ -24,9 +24,23 @@ export interface ChecksBoxs {
   description?: string;
 }
 
+// Data Table
+export interface CustomPopover {
+  header: string;
+  message: string;
+}
+
+
 export interface RowListOptions {
   id: number;
   message: number;
+}
+
+export interface ActionRow{
+  id: number;
+  name: string;
+  icon: string;
+  event: string;
 }
 
 

@@ -1,0 +1,23 @@
+[{
+    "id": 0,
+    "name": "Agregar Fila",
+    "icon": "add",
+    "event": "addRowEmpty(i: number)"
+},
+{
+    "id": 1,
+    "name": "Eliminar Fila",
+    "icon": "trash-outline",
+    "event": "onDeleteRow(i: number)"
+}, {
+    "id": 2,
+    "name": "Copiar Fila",
+    "icon": "copy-outline",
+    "event": "/report-mail"
+}, {
+    "id": 3,
+    "name": "Eliminar Fila",
+    "icon": "clipboard-outline",
+    "event": "/report-mail"
+}
+]

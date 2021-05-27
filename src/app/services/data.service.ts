@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MenuComponents } from '../interfaces/interfaces';
+import { MenuComponents, ActionRow } from '../interfaces/interfaces';
+
 
 
 @Injectable({
@@ -13,4 +14,9 @@ export class DataService {
   getMenuComponents(){
     return this.http.get<MenuComponents[]>('assets/data/menu-components.json');
   }
+
+  getPopOverActionsRow(){
+    return this.http.get<ActionRow[]>('assets/data/popOverActionsRow.json');
+  }
+
 }

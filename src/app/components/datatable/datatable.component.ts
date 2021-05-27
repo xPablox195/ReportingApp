@@ -4,11 +4,10 @@ import { Papa } from 'ngx-papaparse';
 import { Platform } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { RowListOptions } from '../../interfaces/interfaces';
-
-
-
-
+import { RowListOptions, CustomPopover, ActionRow } from '../../interfaces/interfaces';
+import { PopoverController } from '@ionic/angular';
+import { PopoverActionsrowComponent } from '../popover-actionsrow/popover-actionsrow.component';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-datatable',
@@ -40,15 +39,14 @@ export class DatatableComponent implements OnInit {
   mostrarTabla = true;
 
 
-
-
-  customPopoverOptions: any = {
+  CustomPopooverRowList: CustomPopover = {
     header: 'Items per page',
     message: 'Selecciona la cantidad de registros por pagina'
   };
 
+
   constructor(private http: HttpClient, private papa: Papa, private plt: Platform, private socialSharing: SocialSharing,
-              private file: File)
+              private file: File, private popoverController: PopoverController, private dataService: DataService)
               {
                 this.loadCSV();
               }
@@ -71,6 +69,27 @@ export class DatatableComponent implements OnInit {
       message: 20,
     },
   ];
+
+  async popOverActionsRow(indexRow: number, ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverActionsrowComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+    const { data } = await popover.onWillDismiss();
+    switch (data.box){
+      case 0: {this.addRowEmpty(indexRow); break; }
+      case 1: {this.onDeleteRow(indexRow); break; }
+      case 2: break;
+      case 3: break;
+      default: break;
+    }
+
+  }
+
+
 
   ngOnInit() {
     this.contadorPagActal = 1;
@@ -234,5 +253,7 @@ export class DatatableComponent implements OnInit {
       this.mostrarTabla = false;
     }
   }
+
+  onClick(){}
 }
 

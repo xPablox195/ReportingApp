@@ -7,6 +7,7 @@ import { PopoverFiltroComponent } from '../popover-filtro/popover-filtro.compone
 import { FormsModule } from '@angular/forms';
 import { DatatableComponent } from '../datatable/datatable.component';
 import { FormDatatableComponent } from '../form-datatable/form-datatable.component';
+import { PopoverActionsrowComponent } from '../popover-actionsrow/popover-actionsrow.component';
 
 
 
@@ -16,12 +17,12 @@ import { FormDatatableComponent } from '../form-datatable/form-datatable.compone
   declarations: [
     HeaderComponent,
     PopoverFiltroComponent,
-    DatatableComponent, FormDatatableComponent
+    DatatableComponent, FormDatatableComponent, PopoverActionsrowComponent
   ],
   exports: [
     HeaderComponent,
     PopoverFiltroComponent,
-    DatatableComponent, FormDatatableComponent
+    DatatableComponent, FormDatatableComponent, PopoverActionsrowComponent
   ],
   imports: [
     CommonModule,
