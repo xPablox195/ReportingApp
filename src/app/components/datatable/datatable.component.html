@@ -28,7 +28,7 @@
     </ion-list>
   </ion-buttons>
 <ion-buttons slot="end">
-    <ion-button (click)="exportCSV()">
+    <ion-button (click)="filterDataTable()">
       <ion-icon slot="icon-only" name="list-outline"></ion-icon>
     </ion-button>
     <ion-button (click)="exportCSV()">
@@ -65,7 +65,7 @@
     </table>
   </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="mostrarTabla">
   <ion-toolbar>
    <ion-buttons slot="start">
     <ion-button (click)="onClick()">

@@ -254,6 +254,19 @@ export class DatatableComponent implements OnInit {
     }
   }
 
+  filterDataTable(){
+    console.log(this.csvData);
+    this.csvData.sort((a, b) => b - a);
+  }
+
   onClick(){}
+
+  deMenorAMayor(elem1, elem2) {
+    return elem1 - elem2;
+  }
+
+  deMayorAMenor(elem1, elem2) {
+  return elem2 - elem1;
+  }
 }
 
