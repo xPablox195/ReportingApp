@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { PapaParseModule } from 'ngx-papaparse';
 import { File } from '@ionic-native/file/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
   // Register the ServiceWorker as soon as the app is stable
   // or after 30 seconds (whichever comes first).
   registrationStrategy: 'registerWhenStable:30000'
-})],
+}), BrowserAnimationsModule],
   providers: [File, SocialSharing, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
