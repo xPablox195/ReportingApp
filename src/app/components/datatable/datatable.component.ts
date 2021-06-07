@@ -9,6 +9,10 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverActionsrowComponent } from '../popover-actionsrow/popover-actionsrow.component';
 import { DataService } from '../../services/data.service';
 
+
+
+
+
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
@@ -43,6 +47,7 @@ export class DatatableComponent implements OnInit {
     header: 'Items per page',
     message: 'Selecciona la cantidad de registros por pagina'
   };
+
 
 
   constructor(private http: HttpClient, private papa: Papa, private plt: Platform, private socialSharing: SocialSharing,
@@ -268,5 +273,6 @@ export class DatatableComponent implements OnInit {
   deMayorAMenor(elem1, elem2) {
   return elem2 - elem1;
   }
+
 }
 

@@ -9,9 +9,7 @@ import { DatatableComponent } from '../datatable/datatable.component';
 import { FormDatatableComponent } from '../form-datatable/form-datatable.component';
 import { PopoverActionsrowComponent } from '../popover-actionsrow/popover-actionsrow.component';
 
-
-
-
+import { MaterialModule } from '../../material.module';
 
 @NgModule({
   declarations: [

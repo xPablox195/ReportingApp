@@ -9,13 +9,19 @@ import { DataBasePageRoutingModule } from './data-base-routing.module';
 import { DataBasePage } from './data-base.page';
 import { ComponentsModule } from '../../components/components/components.module';
 
+// Angular Material
+import { MaterialModule } from '../../material.module';
+
+
+
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DataBasePageRoutingModule,
-    ComponentsModule
+    DataBasePageRoutingModule, ComponentsModule, MaterialModule
   ],
   declarations: [DataBasePage]
 })
